@@ -87,7 +87,7 @@ class LoginForm extends React.Component {
       this.setState({ formSubmitted: true });
 
       // Update this accordingly.
-      if (email == "demo@demo.com" && password == "demo") {
+      if (email === "demo@demo.com" && password === "demo") {
         this.setState({ authError: false });
       }
     } else {

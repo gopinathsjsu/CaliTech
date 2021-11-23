@@ -82,8 +82,14 @@ export default function SearchFlights() {
                         type="text"
                         className="form-control  shadow form-select"
                       >
-                        <option selected disabled>
+                        <option>
                           Economy
+                        </option>
+                        <option >
+                          Business
+                        </option>
+                        <option >
+                          Business Premium
                         </option>
                       </select>
                     </div>
