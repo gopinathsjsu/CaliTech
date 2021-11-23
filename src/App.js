@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import LoginForm from "./Screens/Login";
 import SearchFlights from "./Screens/SearchFlights";
 import Particles from "react-tsparticles";
+import AdminPage from './Screens/AdminPage'
 function App() {
   return (
     <>
@@ -101,6 +102,9 @@ function App() {
           </Route>
           <Route path="*">
             <Redirect to="/login" />
+          </Route>
+          <Route path="/adminpage">
+            <AdminPage />
           </Route>
         </Switch>
       </BrowserRouter>

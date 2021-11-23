@@ -9,7 +9,7 @@ export default function AdminNav() {
         style={{ backgroundColor: "#fff" }}
       >
         <a className="navbar-brand" href="/">
-          The Famous Airlines
+          Pacific Airlines
         </a>
         <button
           className="navbar-toggler"
@@ -49,6 +49,11 @@ export default function AdminNav() {
             <li className={"nav-item"}>
               <a className="nav-link" href="/checkout">
                 Checkout
+              </a>
+            </li>
+            <li className={"nav-item"}>
+              <a className="nav-link" href="/adminpage">
+                Admin
               </a>
             </li>
           </ul>
