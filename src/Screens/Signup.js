@@ -17,6 +17,7 @@ class Signup extends React.Component {
       formSubmitted: false,
       signInredirect: false,
       loginRedirect:false,
+      redirect:null
     };
     
     this.handleChange = this.handleChange.bind(this);
@@ -74,13 +75,15 @@ class Signup extends React.Component {
 
   handlesignIn(e){
     this.setState({signInredirect:true})
-    const CustomToast = ({closeToast})=>{
-      return(
-        <div style={{textAlign:"center"}}>
-          <h4>Sign in successful</h4>
-        </div>
-      )
-    }
+    // const CustomToast = ({closeToast})=>{
+    //   return(
+    //     <div style={{textAlign:"center"}}>
+    //       <h4>Sign in successful</h4>
+    //     </div>
+    //   )
+    // }
+    e.preventDefault()
+    this.setState({ redirect: "/login" });
 
   }
   handleSubmit(e) {
@@ -125,6 +128,9 @@ class Signup extends React.Component {
       formSubmitted,
       authError,
     } = this.state;
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />
+    }
 
     return (
       <>
@@ -208,7 +214,8 @@ class Signup extends React.Component {
               {/* </p> */}
               <div className="text-center">
                 <p className="small mb-0">Already have an account?</p>
-                <button className="btn btn-primary w-30">Login</button>
+                <button className="btn btn-primary w-30"
+                onClick={this.handlesignIn}>Login</button>
                 {/* <input
                   type="button"
                   className="btn btn-primary w-30"
