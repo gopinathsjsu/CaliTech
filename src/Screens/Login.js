@@ -1,7 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import AdminNav from "../Components/Navbar";
-import history from '../history'
 import { Redirect } from 'react-router-dom'
 import Signup from "./Signup";
 class LoginForm extends React.Component {
