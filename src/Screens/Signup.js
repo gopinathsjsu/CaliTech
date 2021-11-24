@@ -1,6 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import AdminNav from "../Components/Navbar";
+import {toast} from 'react-toastify'
+import { withRouter, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import history from '../history'
 
 class Signup extends React.Component {
   constructor(props) {
@@ -12,14 +16,18 @@ class Signup extends React.Component {
       formValid: false,
       authError: false,
       formSubmitted: false,
+      signInredirect: false,
+      loginRedirect:false,
     };
-
+    
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEmailBlur = this.handleEmailBlur.bind(this);
     this.handlePasswordBlur = this.handlePasswordBlur.bind(this);
+    this.handlesignIn = this.handlesignIn.bind(this)
   }
 
+  
   isValidEmail(email) {
     return /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email);
   }
@@ -42,7 +50,7 @@ class Signup extends React.Component {
 
     this.setState({ formSubmitted: false });
   }
-
+  
   handlePasswordBlur(e) {
     const name = e.target.name;
     const value = e.target.value;
@@ -65,6 +73,17 @@ class Signup extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
+  handlesignIn(e){
+    this.setState({signInredirect:true})
+    const CustomToast = ({closeToast})=>{
+      return(
+        <div style={{textAlign:"center"}}>
+          <h4>Sign in successful</h4>
+        </div>
+      )
+    }
+
+  }
   handleSubmit(e) {
     const {
       email,
@@ -87,7 +106,7 @@ class Signup extends React.Component {
       this.setState({ formSubmitted: true });
 
       // Update this accordingly.
-      if (email == "demo@demo.com" && password == "demo") {
+      if (email === "demo@demo.com" && password === "demo") {
         this.setState({ authError: false });
       }
     } else {
@@ -178,20 +197,25 @@ class Signup extends React.Component {
                   onBlur={this.handlePasswordBlur}
                 />
               </div>
-              <p className=" mb-3">
-                <input
+              {/* <p className=" mb-3"> */}
+              <button className="btn btn-primary w-30"
+                onClick={(e) =>{e.preventDefault();
+                                return(<Redirect to='/signup'/>)}}>Login</button>
+                {/* <input
                   type="button"
                   className="btn btn-primary w-30"
                   value="Signup"
-                />
-              </p>
+                /> */}
+              {/* </p> */}
               <div className="text-center">
                 <p className="small mb-0">Already have an account?</p>
-                <input
+                <button className="btn btn-primary w-30">Login</button>
+                {/* <input
                   type="button"
                   className="btn btn-primary w-30"
                   value="Login"
-                />
+                  onClick={signInredirect ? <Redirect /> : null}
+                /> */}
               </div>
             </form>
           </div>
@@ -201,4 +225,4 @@ class Signup extends React.Component {
   }
 }
 
-export default Signup;
+export default withRouter(Signup);
