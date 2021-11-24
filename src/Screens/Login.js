@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import AdminNav from "../Components/Navbar";
-
+import history from '../history'
+import { Redirect } from 'react-router-dom'
+import Signup from "./Signup";
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
@@ -12,16 +14,24 @@ class LoginForm extends React.Component {
       formValid: false,
       authError: false,
       formSubmitted: false,
+      redirect: null
+
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEmailBlur = this.handleEmailBlur.bind(this);
     this.handlePasswordBlur = this.handlePasswordBlur.bind(this);
+    this.handlesignIn      = this.handlesignIn.bind(this);
   }
 
   isValidEmail(email) {
     return /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email);
+  }
+
+  handlesignIn(e) {
+    e.preventDefault()
+    this.setState({ redirect: "/signup" });
   }
 
   handleEmailBlur(e) {
@@ -73,6 +83,7 @@ class LoginForm extends React.Component {
       emailError2,
       passwordError,
       formSubmitted,
+      hist
     } = this.state;
 
     this.setState({ authError: true });
@@ -108,6 +119,10 @@ class LoginForm extends React.Component {
       authError,
     } = this.state;
 
+    if (this.state.redirect) {
+      return <Redirect to={this.state.redirect} />
+    }
+  
     return (
       <>
       <AdminNav />
@@ -163,6 +178,7 @@ class LoginForm extends React.Component {
                 type="button"
                 className="btn btn-primary w-30"
                 value="Signup"
+                onClick={this.handlesignIn}
               />
             </div>
           </form>

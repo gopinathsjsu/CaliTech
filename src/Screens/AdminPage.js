@@ -36,7 +36,6 @@ function AdminPage() {
                     <div className="d-flex mx-auto">
                     <div className="mx-1">
                     <div className="form-check">
-                    
                     <div className="col mt-3 mx-auto">
                     <div className="row">
                     <div className="col">
