@@ -4,7 +4,6 @@ import AdminNav from "../Components/Navbar";
 import {toast} from 'react-toastify'
 import { withRouter, Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import history from '../history'
 
 class Signup extends React.Component {
   constructor(props) {

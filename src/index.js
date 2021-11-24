@@ -4,11 +4,10 @@ import reportWebVitals from './reportWebVitals';
 import App from './App';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import history from './history'
 import { Router} from 'react-router-dom'
 
 ReactDOM.render(
-  <Router history={history}>
+  <Router>
     <App />
   </Router>,
   document.getElementById('root')
