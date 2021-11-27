@@ -6,7 +6,7 @@ export default function SearchFlights() {
     <>
       <AdminNav />
       <div className="mt-5">
-        <div className="card shadow-sm border-0 px-3 col-sm-11 rounded-2 mb-3 py-4 mx-auto mt-5 bg-light">
+        <div className="card shadow-sm border-0 px-3 col-sm-15 rounded-2 mb-3 py-4 mx-auto mt-5 bg-light">
         <h3 className="text-center">Search Flights</h3>
           <div className="row">
             <div className="col  mx-auto mt-5">

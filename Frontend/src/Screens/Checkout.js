@@ -1,17 +1,16 @@
-import React from 'react'
-import AdminNav from '../Components/Navbar';
+import React from "react";
+import AdminNav from "../Components/Navbar";
 
 export default function Checkout() {
   return (
     <>
       <AdminNav />
       <div className="mt-5">
-        <h3 className="col-3 card p-2  mx-auto text-center">Checkout</h3>
-
-        <div className=" card mx-auto col-10">
+        <div className=" card mx-auto col-8">
           <div className="row">
-            <div className="col mt-5">
-              <div className=" p-2 form-group mb-4 col-4 mx-auto">
+            <h1 className="text-center mt-2">Checkout</h1>
+            <div className="col mt-3">
+              <div className=" p-2 form-group mb-4 col-4 mx-auto w-50">
                 <label className="mb-0">Seat Details</label>
                 <input
                   name="email"
@@ -21,7 +20,7 @@ export default function Checkout() {
                 />
               </div>
 
-              <div className="card p-2 form-group mt-4 mb-4 col-4 mx-auto">
+              <div className="p-2 form-group mt-4 mb-4 col-4 mx-auto w-50">
                 <label className="mb-0">Additionals</label>
                 <select
                   name="email"
@@ -34,7 +33,7 @@ export default function Checkout() {
                 </select>
               </div>
 
-              <div className="form-check mt-3 mb-3 col-4 mx-auto">
+              <div className="form-check mt-3 mb-3 col-4 mx-auto w-50">
                 <input
                   class="form-check-input"
                   type="checkbox"
@@ -45,13 +44,10 @@ export default function Checkout() {
                   Travel Insurance required
                 </label>
               </div>
-              <div className="card p-2 col-3 mx-auto text-end mt-5 mb-3">
-                <button className="btn btn-primary">Pay</button>
-              </div>
             </div>
-            <div className="col">
-              <div className="card shadow-sm border-0 col-8 px-3 rounded-2 mb-3 py-4 mx-auto mt-5 bg-light">
-                <h3>Travel Details</h3>
+            <div className="col mt-3">
+              <div className="px-3 rounded-2 mb-3  mx-auto">
+                <h3 className="text-center">Travel Details</h3>
                 <div
                   className="card-body m-2"
                   style={{ border: "1px solid black" }}
@@ -64,8 +60,7 @@ export default function Checkout() {
                     <div className="col-3">1 stop</div>
                   </div>
                   <div className="row mt-3">
-                    <div className="col"></div>
-                    <div className="col-3">
+                    <div className="col">
                       <h5>$321.20</h5>
                       <h6>Mileage Points = 642.40</h6>
                     </div>
@@ -73,6 +68,11 @@ export default function Checkout() {
                 </div>
               </div>
             </div>
+          </div>
+          <div className="p-2 w-25 mx-auto mt-3 mb-2 text-center">
+            <button className="btn btn-primary w-75 font-weight-bold">
+              Pay
+            </button>
           </div>
         </div>
       </div>

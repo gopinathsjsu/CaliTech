@@ -5,3 +5,6 @@
 .card{
     opacity: 0.9;
 }
+*,*::after,*::before{
+    box-sizing: border-box;
+}
