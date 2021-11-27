@@ -1,0 +1,7 @@
+{
+  "host" : "localhost",
+  "port" : 5676,
+  "frontEndHost" : "localhost",
+  "frontEndPort" : 3000,
+  "mongoDbConfiguration" : "mongodb+srv://admin:root@cluster0.c7j1c.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+}
