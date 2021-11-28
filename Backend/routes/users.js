@@ -1,7 +1,10 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const Users = require('../models/UsersModel');
+const FlightBooking = require('../models/FlightBookingModel')
 const configurations = require('../config.json');
+const mongoose = require("mongoose");
+const Flights = require("../models/FlightsModel");
 
 const router = express.Router();
 const saltRounds = 10;
@@ -36,7 +39,9 @@ router.post('/create', async (req, res) => {
     const newUser = new Users({
       name: req.body.name,
       email: req.body.email,
-      password: hashedPassword
+      password: hashedPassword,
+      FFNumber: "FF"+ parseInt(Math.random()*1000000),
+      mileagePoints: 0
     });
 
     const rows = await newUser.save();
@@ -212,66 +217,103 @@ router.post('/orders', async (req, res) => {
   }
 });
 
-router.post('/createOrder', async (req, res) => {
+router.post('/createFlightBooking', async (req, res) => {
   try {
-    req.body.description = JSON.stringify(req.body.description);
-    req.body.address = JSON.stringify(req.body.address);
-    // req.body.dateTime = JSON.stringify(req.body.dateTime);
-    const newOrder = new Orders({
-      description: req.body.description,
-      email: req.body.email,
-      totalCost: req.body.totalCost,
-      dateTime: req.body.dateTime,
-      deliveryStatus: req.body.deliveryStatus,
+    const newBooking = new FlightBooking({
+      flightId: req.body.flightId,
+      userId: req.body.userId,
+      seatNumbers: req.body.seatNumbers,
       status: req.body.status,
-      deliveryType: req.body.deliveryType,
-      customerID: req.body.customerID,
-      restaurantID: req.body.restaurantID,
-      address: req.body.address,
-      deliveryNote: req.body.deliveryNote,
+      totalPrice: req.body.totalPrice
     });
-    const rows = await newOrder.save();
-    console.log(rows);
-    // eslint-disable-next-line no-underscore-dangle
+    const rows = await newBooking.save();
+
+    const flightData = await Flights.find({ _id: req.body.flightId });
+    console.log(flightData);
+    let seatsInFlights = flightData.bookedSeats;
+    for(let i in req.body.seatNumbers){
+      seatsInFlights.push(i)
+    }
+    const rowsf = await Flights.updateOne({ _id: req.body.flightId }, {
+      bookedSeats : seatsInFlights
+    });
+
+    const userData = await Users.find({ _id: req.body.userId });
+    console.log(userData);
+    let mileagePoints = userData.mileagePoints + req.body.totalPrice * 2;
+    const rowsu = await Users.updateOne({ _id: req.body.userId }, {
+      mileagePoints
+    });
+
     if (rows._doc) {
-      res.status(200).json({ msg: 'Successfully created an Order' });
+      res.status(200).json({ msg: 'Successfully created a flight booking' });
     } else {
       throw new Error("DB didn't return success response");
     }
   } catch (e) {
-    console.error('Error creating an Order:');
+    console.error('Error creating a flight booking:');
     console.error(e);
     res.status(400).json({
-      msg: `Error creating an Order: ${e}`,
+      msg: `Error creating a flight booking: ${e}`,
     });
   }
 });
 
-router.put('/updateFavorites', async (req, res) => {
+router.put('/cancelFlightBooking', async (req, res) => {
   try {
-    const updated = req.body.favorites;
-    const index = updated.indexOf(req.body.restaurantID);
-    if (index > -1) {
-      updated.splice(index, 1);
-    } else {
-      updated.push(req.body.restaurantID);
-    }
-    const rows = await Users.updateOne({ _id: req.body.id }, {
-      favorites: JSON.stringify(updated),
+    const rows = await FlightBooking.updateOne({ _id: req.body.id }, {
+      status : req.body.status
     });
-    console.log(rows);
+
+    const flightData = await Flights.find({ _id: req.body.flightId });
+    console.log(flightData);
+    let seatsInFlights = flightData.bookedSeats;
+    for(let i in req.body.seatNumbers){
+      const index = seatsInFlights.indexOf(i);
+      if (index > -1) {
+        seatsInFlights.splice(index, 1);
+      }
+    }
+    const rowsf = await Flights.updateOne({ _id: req.body.flightId }, {
+      bookedSeats : seatsInFlights
+    });
+
+    const userData = await Users.find({ _id: req.body.userId });
+    console.log(userData);
+    let mileagePoints = userData.mileagePoints - req.body.totalPrice * 2;
+    const rowsu = await Users.updateOne({ _id: req.body.id }, {
+      mileagePoints
+    });
     if (rows.modifiedCount === 1) {
-      res.status(200).json({ msg: 'Successfully updated the user favorites' });
+      res.status(200).json({ msg: 'Successfully cancelled a flight booking' });
     } else {
       throw new Error("DB didn't return success response");
     }
   } catch (e) {
-    console.error('Error updating the user favorites:');
+    console.error('Error cancelling a flight booking:');
     console.error(e);
     res.status(400).json({
-      msg: `Error updating  updating the user favorites: ${e}`,
+      msg: `Error cancelling a flight booking: ${e}`,
     });
   }
 });
+
+router.post('/flightBookings', async (req, res) => {
+  try {
+    const FlightData = await FlightBooking.find({ userId: req.body.userId });
+    if (FlightData.length > 0) {
+      console.log(FlightData);
+      console.log('Fetched the flight data from DB');
+      res.status(200).json(FlightData[0]);
+    }
+  } catch (e) {
+    console.error('Error fetching data from DB:');
+    console.error(e);
+    res.status(400).json({
+      msg: `Error fetching data from DB: ${e}`,
+    });
+  }
+});
+
 
 module.exports = router;
