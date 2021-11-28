@@ -4,6 +4,7 @@ import AdminNav from "../Components/Navbar";
 import {toast} from 'react-toastify'
 import { withRouter, Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Particle from '../Components/Particle'
 
 class Signup extends React.Component {
   constructor(props) {
@@ -134,7 +135,8 @@ class Signup extends React.Component {
 
     return (
       <>
-        <AdminNav />
+        {/* <AdminNav /> */}
+        <Particle />
         <div className="card shadow-sm border-0 px-3 col-sm-4 rounded-2 mb-3 py-4 mx-auto mt-5 bg-light">
           <div className="card-header bg-transparent border-0 text-center text-uppercase">
             <h3>Signup</h3>

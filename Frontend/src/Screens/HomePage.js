@@ -1,12 +1,15 @@
 import React from 'react'
 import AdminNav from '../Components/Navbar'
+import Particle from '../Components/Particle'
 
 function HomePage() {
     return (
-        <div>
-         <AdminNav />
-            
-        </div>
+        <>
+        
+            <Particle />
+            <AdminNav />
+    
+        </>
     )
 }
 

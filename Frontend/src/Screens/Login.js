@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import AdminNav from "../Components/Navbar";
 import { Redirect } from 'react-router-dom'
 import Signup from "./Signup";
+import Particle from '../Components/Particle'
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
@@ -124,7 +124,7 @@ class LoginForm extends React.Component {
   
     return (
       <>
-      <AdminNav />
+      <Particle />
       <div className="card shadow-sm border-0 px-3 col-sm-4 rounded-2 mb-3 py-4 mx-auto mt-5 bg-light">
         <div className="card-header bg-transparent border-0 text-center text-uppercase">
           <h3>Login</h3>

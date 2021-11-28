@@ -36,7 +36,7 @@ export default function AdminNav() {
                 Signup
               </a>
             </li>
-            <li className={"nav-item"}>
+            {/* <li className={"nav-item"}>
               <a className="nav-link" href="/mileageaccount">
                 Mileage Account
               </a>
@@ -50,7 +50,7 @@ export default function AdminNav() {
               <a className="nav-link" href="/checkout">
                 Checkout
               </a>
-            </li>
+            </li> */}
             <li className={"nav-item"}>
               <a className="nav-link" href="/adminpage">
                 Admin
