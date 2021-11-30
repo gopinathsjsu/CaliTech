@@ -230,9 +230,9 @@ router.post('/createFlightBooking', async (req, res) => {
 
     const flightData = await Flights.find({ _id: req.body.flightId });
     console.log(flightData);
-    let seatsInFlights = flightData.bookedSeats;
+    let seatsInFlights = JSON.parse(JSON.stringify(flightData[0])).bookedSeats;
     for(let i in req.body.seatNumbers){
-      seatsInFlights.push(i)
+      seatsInFlights.push(req.body.seatNumbers[i])
     }
     const rowsf = await Flights.updateOne({ _id: req.body.flightId }, {
       bookedSeats : seatsInFlights
@@ -240,7 +240,7 @@ router.post('/createFlightBooking', async (req, res) => {
 
     const userData = await Users.find({ _id: req.body.userId });
     console.log(userData);
-    let mileagePoints = userData.mileagePoints + req.body.totalPrice * 2;
+    let mileagePoints = JSON.parse(JSON.stringify(userData[0])).mileagePoints + req.body.totalPrice * 2;
     const rowsu = await Users.updateOne({ _id: req.body.userId }, {
       mileagePoints
     });
@@ -267,9 +267,9 @@ router.put('/cancelFlightBooking', async (req, res) => {
 
     const flightData = await Flights.find({ _id: req.body.flightId });
     console.log(flightData);
-    let seatsInFlights = flightData.bookedSeats;
+    let seatsInFlights = JSON.parse(JSON.stringify(flightData[0])).bookedSeats;
     for(let i in req.body.seatNumbers){
-      const index = seatsInFlights.indexOf(i);
+      const index = seatsInFlights.indexOf(req.body.seatNumbers[i]);
       if (index > -1) {
         seatsInFlights.splice(index, 1);
       }
@@ -280,8 +280,8 @@ router.put('/cancelFlightBooking', async (req, res) => {
 
     const userData = await Users.find({ _id: req.body.userId });
     console.log(userData);
-    let mileagePoints = userData.mileagePoints - req.body.totalPrice * 2;
-    const rowsu = await Users.updateOne({ _id: req.body.id }, {
+    let mileagePoints = JSON.parse(JSON.stringify(userData[0])).mileagePoints - (req.body.totalPrice * 2);
+    const rowsu = await Users.updateOne({ _id: req.body.userId }, {
       mileagePoints
     });
     if (rows.modifiedCount === 1) {
