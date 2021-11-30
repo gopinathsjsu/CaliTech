@@ -1,16 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import AdminNav from "../Components/Navbar";
-import {toast} from 'react-toastify'
 import { withRouter, Redirect } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import Particle from '../Components/Particle'
+import axios from 'axios';
+import {toast} from 'react-toastify'
 
 class Signup extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      fname:"",
       email: "",
+      confirm_pwd:"",
       password: "",
       passwordError: false,
       formValid: false,
@@ -18,7 +20,8 @@ class Signup extends React.Component {
       formSubmitted: false,
       signInredirect: false,
       loginRedirect:false,
-      redirect:null
+      redirect:null,
+      isValid: true,
     };
     
     this.handleChange = this.handleChange.bind(this);
@@ -28,7 +31,6 @@ class Signup extends React.Component {
     this.handlesignIn = this.handlesignIn.bind(this)
   }
 
-  
   isValidEmail(email) {
     return /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email);
   }
@@ -89,13 +91,32 @@ class Signup extends React.Component {
   }
   handleSubmit(e) {
     const {
+      name,
       email,
       password,
+      confirm_pwd,
       emailError,
       emailError2,
       passwordError,
       formSubmitted,
+      isValid
+      
     } = this.state;
+
+    if (password != confirm_pwd) {
+      this.setState({isValid: false});
+      console.log(isValid)
+      console.log(password,confirm_pwd)
+      const CustomToast = ({closeToast})=>{
+        return(
+          <div style={{textAlign:"center"}}>
+            <h4>Passwords do not match!</h4>
+          </div>
+        )
+      
+      }
+      toast.error(<CustomToast />, {position: toast.POSITION.BOTTOM_CENTER, autoClose:true})
+    }
 
     this.setState({ authError: true });
     this.setState({ emailError: email ? false : true });
@@ -115,19 +136,32 @@ class Signup extends React.Component {
     } else {
       this.setState({ formValid: false });
     }
+    axios.post('/create', {name , email , password})
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
 
     e.preventDefault();
+    return(<Redirect to='/signup'/>)
+
+    
   }
 
   render() {
     const {
+      name,
       email,
       password,
+      confirm_pwd,
       passwordError,
       emailError,
       emailError2,
       formSubmitted,
       authError,
+      isValid
     } = this.state;
     if (this.state.redirect) {
       return <Redirect to={this.state.redirect} />
@@ -153,13 +187,14 @@ class Signup extends React.Component {
                   Full Name<span className="text-danger">*</span>
                 </label>
                 <input
-                  name="email"
+                  name="fname"
                   type="text"
                   className="form-control"
-                  placeholder="Email ID"
-                  value={email}
+                  placeholder="Full name"
+                  value={name}
                   onChange={this.handleChange}
                   onBlur={this.handleEmailBlur}
+                  required="required"
                 />
               </div>
               <div className="form-group mb-3">
@@ -174,20 +209,7 @@ class Signup extends React.Component {
                   value={email}
                   onChange={this.handleChange}
                   onBlur={this.handleEmailBlur}
-                />
-              </div>
-              <div className="form-group mb-3">
-                <label className="mb-0">
-                  Confirm Password<span className="text-danger">*</span>
-                </label>
-                <input
-                  name="password"
-                  type="password"
-                  className="form-control"
-                  placeholder="Password"
-                  value={password}
-                  onChange={this.handleChange}
-                  onBlur={this.handlePasswordBlur}
+                  required="required"
                 />
               </div>
               <div className="form-group mb-3">
@@ -202,12 +224,26 @@ class Signup extends React.Component {
                   value={password}
                   onChange={this.handleChange}
                   onBlur={this.handlePasswordBlur}
+                  required="required"
+                />
+              </div>
+              <div className="form-group mb-3">
+                <label className="mb-0">
+                Confirm Password<span className="text-danger">*</span>
+                </label>
+                <input
+                  name="confirm_pwd"
+                  type="password"
+                  className="form-control"
+                  placeholder="confirm password"
+                  value={confirm_pwd}
+                  onChange={this.handleChange}
+                  onBlur={this.handlePasswordBlur}
+                  required="required"
                 />
               </div>
               {/* <p className=" mb-3"> */}
-              <button className="btn btn-primary w-30"
-                onClick={(e) =>{e.preventDefault();
-                                return(<Redirect to='/signup'/>)}}>Login</button>
+              <button className="btn btn-primary w-30">Sign Up</button>
                 {/* <input
                   type="button"
                   className="btn btn-primary w-30"
