@@ -9,3 +9,7 @@
 - Calculation of Mileage points: The mileage points for each custmomer will be calculated by multipying their ticket price/fare by two.
 - mileagePoints = fare * 2 ; 
 - Example: For a ticket worth $1000 the mileagePoints awareded to that customer will be 2000 points.
+
+
+Team Meeting:
+Every Thursday 
