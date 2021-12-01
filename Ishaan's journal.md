@@ -14,4 +14,5 @@ Met with Tarun and finalized the design. Started coding the sign up page and log
 
 WEEK 4
 
-Pushed the front end, back end integration in process. Testing phase starts
+Pushed the front end, back end integration in process. Testing phase starts.
+The documentation is being created by me. Finishing up final stages of the project and making sure everything works before the demo.
