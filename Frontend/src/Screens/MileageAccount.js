@@ -1,9 +1,10 @@
 import React from "react";
+import AdminNav from "../Components/Navbar";
 
 export default function MileageAccount() {
   return (
     <>
-
+      <AdminNav trigger/>
       <div className="mt-5">
 
         <div className="card shadow-sm border-0 px-3 col-sm-11 rounded-2 mb-3 py-4 mx-auto mt-6 bg-light">

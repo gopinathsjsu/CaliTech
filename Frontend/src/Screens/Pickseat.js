@@ -7,18 +7,6 @@ export default class Pickseat  extends Component {
     loading: false
   }
  
-//   addSeatCallback = ({ row, number, id }, addCb) => {
-//     this.setState({
-//       loading: true
-//     }, async () => {
-//       await new Promise(resolve => setTimeout(resolve, 1500))
-//       console.log(`Added seat ${number}, row ${row}, id ${id}`)
-//       const newTooltip = `tooltip for id-${id} added by callback`
-//       addCb(row, number, id, newTooltip)
-//       this.setState({ loading: false })
-//     })
-//   }
- 
   addSeatCallbackContinousCase = ({ row, number, id }, addCb, params, removeCb) => {
     this.setState({
       loading: true

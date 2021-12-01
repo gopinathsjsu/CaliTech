@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
 
-export default function AdminNav() {
+
+export default function AdminNav(props) {
   return (
     <div className="container-fluid p-0">
       <nav
         className="navbar shadow navbar-expand-lg navbar-light px-2"
-        style={{ backgroundColor: "#fff" }}
+        style={{ backgroundColor: "#A9A9A9" }}
       >
         <a className="navbar-brand" href="/">
           Pacific Airlines
@@ -25,8 +25,8 @@ export default function AdminNav() {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
-         
-            <li className={"nav-item"}>
+          {!props.trigger ? 
+            (<><li className={"nav-item"}>
               <a className="nav-link" href="/login">
                 Login
               </a>
@@ -35,30 +35,22 @@ export default function AdminNav() {
               <a className="nav-link" href="/signup">
                 Signup
               </a>
-            </li>
-            {/* <li className={"nav-item"}>
-              <a className="nav-link" href="/mileageaccount">
-                Mileage Account
-              </a>
-            </li>
-            <li className={"nav-item"}>
-              <a className="nav-link" href="/searchflights">
-                Search Flights
-              </a>
-            </li>
-            <li className={"nav-item"}>
-              <a className="nav-link" href="/checkout">
-                Checkout
-              </a>
-            </li> */}
-            <li className={"nav-item"}>
-              <a className="nav-link" href="/adminpage">
-                Admin
-              </a>
-            </li>
+            </li></>):
+            (<><li className={"nav-item"}>
+            <a className="nav-link" href="/profile">
+              Miles Account
+            </a>
+          </li>
+          <li className={"nav-item"}>
+            <a className="nav-link" href="/miles">
+              Check Flights
+            </a>
+          </li></>)
+            }
           </ul>
         </div>
       </nav>
     </div>
-  );
+  ) 
+      
 }

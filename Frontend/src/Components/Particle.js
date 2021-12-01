@@ -11,7 +11,7 @@ export default function Particle() {
         options={{
           background: {
             color: {
-              value: "#0d47a1",
+              value: "#000000",
           
             },
           },

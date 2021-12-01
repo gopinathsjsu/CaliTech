@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import { Redirect } from 'react-router-dom'
 import Signup from "./Signup";
 import Particle from '../Components/Particle'
+import axios from "axios";
+import AdminNav from "../Components/Navbar";
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
@@ -13,7 +15,8 @@ class LoginForm extends React.Component {
       formValid: false,
       authError: false,
       formSubmitted: false,
-      redirect: null
+      redirect: null,
+      isLogin: false
 
     };
 
@@ -21,17 +24,14 @@ class LoginForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEmailBlur = this.handleEmailBlur.bind(this);
     this.handlePasswordBlur = this.handlePasswordBlur.bind(this);
-    this.handlesignIn      = this.handlesignIn.bind(this);
+    // this.handlesignIn      = this.handlesignIn.bind(this);
   }
 
   isValidEmail(email) {
     return /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/.test(email);
   }
 
-  handlesignIn(e) {
-    e.preventDefault()
-    this.setState({ redirect: "/signup" });
-  }
+  
 
   handleEmailBlur(e) {
     const name = e.target.name;
@@ -76,6 +76,7 @@ class LoginForm extends React.Component {
 
   handleSubmit(e) {
     const {
+      name,
       email,
       password,
       emailError,
@@ -105,6 +106,9 @@ class LoginForm extends React.Component {
     }
 
     e.preventDefault();
+    this.setState({ redirect: "/signup" });
+  //   axios.post('/', {name, email, password})
+  //   .then()
   }
 
   render() {
@@ -125,6 +129,7 @@ class LoginForm extends React.Component {
     return (
       <>
       <Particle />
+      <AdminNav trigger={this.state.isLogin}/>
       <div className="card shadow-sm border-0 px-3 col-sm-4 rounded-2 mb-3 py-4 mx-auto mt-5 bg-light">
         <div className="card-header bg-transparent border-0 text-center text-uppercase">
           <h3>Login</h3>
@@ -148,6 +153,7 @@ class LoginForm extends React.Component {
                 value={email}
                 onChange={this.handleChange}
                 onBlur={this.handleEmailBlur}
+                required
               />
             </div>
             <div className="form-group mb-3">
@@ -162,9 +168,10 @@ class LoginForm extends React.Component {
                 value={password}
                 onChange={this.handleChange}
                 onBlur={this.handlePasswordBlur}
+                required="required"
               />
             </div>
-            <p className=" mb-3">
+            <p className="mb-3">
               <input
                 type="button"
                 className="btn btn-primary w-30"
@@ -177,7 +184,7 @@ class LoginForm extends React.Component {
                 type="button"
                 className="btn btn-primary w-30"
                 value="Signup"
-                onClick={this.handlesignIn}
+                // onClick={this.handlesignIn}
               />
             </div>
           </form>
