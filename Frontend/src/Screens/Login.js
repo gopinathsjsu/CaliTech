@@ -5,6 +5,11 @@ import Signup from "./Signup";
 import Particle from '../Components/Particle'
 import axios from "axios";
 import AdminNav from "../Components/Navbar";
+import { withRouter } from "react-router";
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure();
 class LoginForm extends React.Component {
   constructor(props) {
     super(props);
@@ -16,7 +21,9 @@ class LoginForm extends React.Component {
       authError: false,
       formSubmitted: false,
       redirect: null,
-      isLogin: false
+      isLogin: false,
+      custDetails: {},
+      validation:'needs-validation'
 
     };
 
@@ -24,7 +31,7 @@ class LoginForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEmailBlur = this.handleEmailBlur.bind(this);
     this.handlePasswordBlur = this.handlePasswordBlur.bind(this);
-    // this.handlesignIn      = this.handlesignIn.bind(this);
+    this.handlesignIn      = this.handlesignIn.bind(this);
   }
 
   isValidEmail(email) {
@@ -85,7 +92,9 @@ class LoginForm extends React.Component {
       formSubmitted,
       hist
     } = this.state;
+    // if(email.length > 0 && password.length > 0){
 
+    // }
     this.setState({ authError: true });
     this.setState({ emailError: email ? false : true });
     if (email && !emailError) {
@@ -102,13 +111,56 @@ class LoginForm extends React.Component {
         this.setState({ authError: false });
       }
     } else {
-      this.setState({ formValid: false });
+      this.setState({ formValid: false});
     }
 
     e.preventDefault();
-    this.setState({ redirect: "/signup" });
-  //   axios.post('/', {name, email, password})
-  //   .then()
+    // if (!e.currentTarget.form.checkValidity()) {
+    //   e.preventDefault()
+    //   e.stopPropagation()
+    //   e.currentTarget.form.classList.add('was-validated')
+    // }
+
+    
+    // else{
+    // e.currentTarget.form.classList.remove('was-validated')
+    axios({
+      method:'post',
+      url:'http://localhost:5676/users/login',
+      data: {
+        email:'abc',
+        password:"q"
+      }
+
+    })
+    .then((response) =>{
+      const custDetails = response.data; 
+      this.setState({custDetails:custDetails});
+      console.log(custDetails)
+
+    })
+    .catch((err) =>{
+      console.log(err)
+      const CustomToast = ({closeToast})=>{
+        return(
+          <div style={{textAlign:"center"}}>
+            <h4>Email or password wrong!</h4>
+          </div>
+        )
+      
+      }
+      toast.error(<CustomToast />, {position: toast.POSITION.BOTTOM_CENTER, autoClose:true})
+    })
+  // }
+    
+      
+    this.props.history.push('/profilecreation')
+    // this.setState({ redirect: "/profilecreation" });
+  }
+  handlesignIn(e){
+    e.preventDefault();
+    this.props.history.push('/signup');
+    //this.setState({ redirect: "/signup" });
   }
 
   render() {
@@ -122,9 +174,9 @@ class LoginForm extends React.Component {
       authError,
     } = this.state;
 
-    if (this.state.redirect) {
-      return <Redirect to={this.state.redirect} />
-    }
+    // if (this.state.redirect) {
+    //   return <Redirect to={this.state.redirect} />
+    // }
   
     return (
       <>
@@ -136,9 +188,10 @@ class LoginForm extends React.Component {
         </div>
         <div className="card-body">
           <form
-            action="/"
-            onSubmit={(e) => this.handleSubmit(e)}
-            encType="multipart/form-data"
+          className={this.state.validation} 
+          novalidate  
+            onSubmit={this.handleSubmit}
+            // encType="multipart/form-data"
             autoComplete="off"
           >
             <div className="form-group mb-3">
@@ -150,11 +203,15 @@ class LoginForm extends React.Component {
                 type="email"
                 className="form-control"
                 placeholder="Email ID"
+                id="validationCustom01"
                 value={email}
                 onChange={this.handleChange}
                 onBlur={this.handleEmailBlur}
                 required
               />
+              <div class="invalid-feedback">
+              Please type your email.
+             </div>
             </div>
             <div className="form-group mb-3">
               <label className="mb-0">
@@ -165,17 +222,19 @@ class LoginForm extends React.Component {
                 type="password"
                 className="form-control"
                 placeholder="Password"
+                id="validationCustom02"
                 value={password}
                 onChange={this.handleChange}
                 onBlur={this.handlePasswordBlur}
-                required="required"
+                required
               />
             </div>
             <p className="mb-3">
               <input
-                type="button"
+                type="submit"
                 className="btn btn-primary w-30"
                 value="Login"
+                // onClick={this.handleSubmit}
               />
             </p>
             <div className="text-center">
@@ -184,7 +243,7 @@ class LoginForm extends React.Component {
                 type="button"
                 className="btn btn-primary w-30"
                 value="Signup"
-                // onClick={this.handlesignIn}
+                onClick={this.handlesignIn}
               />
             </div>
           </form>
@@ -200,4 +259,4 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-export default LoginForm;
+export default withRouter(LoginForm);

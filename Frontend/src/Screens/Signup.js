@@ -25,6 +25,7 @@ class Signup extends React.Component {
       loginRedirect:false,
       redirect:null,
       isValid: false,
+      isLogin:false
       // passwordtoast: false,
     };
     
@@ -127,6 +128,17 @@ class Signup extends React.Component {
       }
       toast.error(<CustomToast />, {position: toast.POSITION.BOTTOM_CENTER, autoClose:true})
     }
+    else{
+      axios.post('http://localhost:5676/users/create', {name , email , password})
+    .then((res) => {
+      console.log(res)
+      this.props.history.push('/profilecreation');
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+
+    }
 
     this.setState({ authError: true });
     this.setState({ emailError: email ? false : true });
@@ -146,18 +158,12 @@ class Signup extends React.Component {
     } else {
       this.setState({ formValid: false });
     }
-    // axios.post('/create', {name , email , password})
-    // .then((res) => {
-    //   console.log(res)
-    // })
-    // .catch((err) => {
-    //   console.log(err)
-    // })
+    
 
     e.preventDefault();
     // return(<Redirect to='/profilecreation'/>)
     // this.setState({ redirect: "/profilecreation" });
-    this.props.history.push('/profilecreation');
+    
 
     
   }
@@ -185,7 +191,7 @@ class Signup extends React.Component {
 
     return (
       <>
-        {/* <AdminNav /> */}
+        <AdminNav trigger={this.state.isLogin}/>
         {/* <Particle /> */}
 
         <div className="card shadow-sm border-0 px-3 col-sm-4 rounded-2 mb-3 py-4 mx-auto mt-5 bg-light">
@@ -211,7 +217,7 @@ class Signup extends React.Component {
                   value={name}
                   onChange={this.handleChange}
                   onBlur={this.handleEmailBlur}
-                  required="required"
+                  required
                 />
               </div>
               <div className="form-group mb-3">
@@ -226,7 +232,7 @@ class Signup extends React.Component {
                   value={email}
                   onChange={this.handleChange}
                   onBlur={this.handleEmailBlur}
-                  required="required"
+                  required
                 />
               </div>
               <div className="form-group mb-3">
@@ -241,7 +247,7 @@ class Signup extends React.Component {
                   value={password}
                   onChange={this.handleChange}
                   onBlur={this.handlePasswordBlur}
-                  required="required"
+                  required
                 />
               </div>
               <div className="form-group mb-3">
@@ -256,7 +262,7 @@ class Signup extends React.Component {
                   value={confirm_pwd}
                   onChange={this.handleChange}
                   onBlur={this.handlePasswordBlur}
-                  required="required"
+                  required
                 />
               </div>
               {/* <p className=" mb-3"> */}
