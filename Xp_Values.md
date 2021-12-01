@@ -1,4 +1,7 @@
 XP Core Values implemented:
+
+
+
 Ishaan Bhalla  - Communication
 Ishaan made sure the team kept in touch every week and communicated all the doubts and problems. He also worked at the UI and kept good deal of contact with the Back end so as to make integration as smooth as possible. Ishaan always kept the morale high of the team and made sure the work environment was productive ,fun and interactive, without him there would be a communication gap between the front and the back end developers. 
 
