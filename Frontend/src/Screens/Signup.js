@@ -4,7 +4,10 @@ import AdminNav from "../Components/Navbar";
 import { withRouter, Redirect } from 'react-router-dom';
 import Particle from '../Components/Particle'
 import axios from 'axios';
-import {toast} from 'react-toastify'
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure();
 
 class Signup extends React.Component {
   constructor(props) {
@@ -21,7 +24,8 @@ class Signup extends React.Component {
       signInredirect: false,
       loginRedirect:false,
       redirect:null,
-      isValid: true,
+      isValid: false,
+      // passwordtoast: false,
     };
     
     this.handleChange = this.handleChange.bind(this);
@@ -89,6 +93,11 @@ class Signup extends React.Component {
     this.setState({ redirect: "/login" });
 
   }
+
+  notify = () => {
+  toast.success('Passwords do not match!');
+  }
+
   handleSubmit(e) {
     const {
       name,
@@ -103,10 +112,11 @@ class Signup extends React.Component {
       
     } = this.state;
 
-    if (password != confirm_pwd) {
+    if (password !== confirm_pwd) {
       this.setState({isValid: false});
-      console.log(isValid)
-      console.log(password,confirm_pwd)
+      console.log(isValid);
+      console.log(password,confirm_pwd);
+      // this.setState({passwordtoast: true});
       const CustomToast = ({closeToast})=>{
         return(
           <div style={{textAlign:"center"}}>
@@ -136,16 +146,18 @@ class Signup extends React.Component {
     } else {
       this.setState({ formValid: false });
     }
-    axios.post('/create', {name , email , password})
-    .then((res) => {
-      console.log(res)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+    // axios.post('/create', {name , email , password})
+    // .then((res) => {
+    //   console.log(res)
+    // })
+    // .catch((err) => {
+    //   console.log(err)
+    // })
 
     e.preventDefault();
-    return(<Redirect to='/signup'/>)
+    // return(<Redirect to='/profilecreation'/>)
+    // this.setState({ redirect: "/profilecreation" });
+    this.props.history.push('/profilecreation');
 
     
   }
@@ -163,14 +175,19 @@ class Signup extends React.Component {
       authError,
       isValid
     } = this.state;
+    let passwordMatch = null;
     if (this.state.redirect) {
       return <Redirect to={this.state.redirect} />
+    }
+    if(this.state.passwordtoast){
+      passwordMatch = this.notify();
     }
 
     return (
       <>
         {/* <AdminNav /> */}
-        <Particle />
+        {/* <Particle /> */}
+
         <div className="card shadow-sm border-0 px-3 col-sm-4 rounded-2 mb-3 py-4 mx-auto mt-5 bg-light">
           <div className="card-header bg-transparent border-0 text-center text-uppercase">
             <h3>Signup</h3>
