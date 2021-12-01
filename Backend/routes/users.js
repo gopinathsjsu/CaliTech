@@ -5,6 +5,7 @@ const FlightBooking = require('../models/FlightBookingModel')
 const configurations = require('../config.json');
 const mongoose = require("mongoose");
 const Flights = require("../models/FlightsModel");
+//const validate = require("../passport")
 
 const router = express.Router();
 const saltRounds = 10;
@@ -81,13 +82,13 @@ router.put('/update', async (req, res) => {
     console.error('Error updating the user details:');
     console.error(e);
     res.status(400).json({
-      msg: `Error updating  updating the user details: ${e}`,
+      msg: `Error updating the user details: ${e}`,
     });
   }
 });
 
 /* Check Login credentials */
-router.post('/login', async (req, res) => {
+router.post('/login', /*validate,*/ async (req, res) => {
   try {
     const rows = await Users.find({});
     let flag = false;
