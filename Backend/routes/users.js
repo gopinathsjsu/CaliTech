@@ -5,6 +5,7 @@ const FlightBooking = require('../models/FlightBookingModel')
 const configurations = require('../config.json');
 const mongoose = require("mongoose");
 const Flights = require("../models/FlightsModel");
+const ObjectId = require("mongoose").Types.ObjectId;
 //const validate = require("../passport")
 
 const router = express.Router();
@@ -72,6 +73,7 @@ router.put('/update', async (req, res) => {
       number: req.body.number,
       email: req.body.email,
       address: req.body.address,
+      passportNumber: req.body.passportNumber
     });
     if (rows.modifiedCount === 1) {
       res.status(200).json({ msg: 'Successfully updated the user details' });
@@ -301,7 +303,40 @@ router.put('/cancelFlightBooking', async (req, res) => {
 
 router.post('/flightBookings', async (req, res) => {
   try {
-    const FlightData = await FlightBooking.find({ userId: req.body.userId });
+    const FlightData = await FlightBooking.aggregate([
+      {
+        $match: {
+          $and: [{ userId: ObjectId(req.body.userId) }],
+        },
+      },
+      // { $set: { useObjID: { $toObjectId: 'userId' } } },
+      {
+        $lookup: {
+          from: "flights",
+          localField: "flightId",
+          foreignField: "_id",
+          as: "flightRow",
+        },
+      },
+      { $unwind: "$flightRow" },
+      {
+        $project: {
+          _id: 1,
+          userId: 1,
+          flightId: 1,
+          seatNumbers: 1,
+          status: 1,
+          totalPrice: 1,
+          flightCode: "$flightRow.flightCode",
+          airlineName: "$flightRow.airlineName",
+          departureLocation: "$flightRow.departureLocation",
+          arrivalLocation: "$flightRow.arrivalLocation",
+          departureDateTime: "$flightRow.departureDateTime",
+          arrivalDateTime: "$flightRow.arrivalDateTime",
+          flightType: "$flightRow.flightType",
+        },
+      },
+    ]);
     if (FlightData.length > 0) {
       console.log(FlightData);
       console.log('Fetched the flight data from DB');
