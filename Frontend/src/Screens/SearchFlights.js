@@ -59,7 +59,6 @@ export default function SearchFlights() {
     }
   return (
     <>
-      <Particle />
       <AdminNav trigger/>
       {filteredFlights.length > 0 ? (
         <DisplayFlight flightData={filteredFlights} />
