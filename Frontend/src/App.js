@@ -41,7 +41,7 @@ const PrivateRoute = ({login,Component, ...rest}) => {
           <PrivateRoute path="/searchflights" login={!!loginSession} Component={SearchFlights} />
           <PrivateRoute path="/mileageaccount" login={!!loginSession} Component={MileageAccount} />
           <PrivateRoute path="/pickseat" login={!!loginSession} Component={Pickseat} />
-          <PrivateRoute path="/profilecreation" login={!!loginSession} Component={ProfileCreation} />
+          <Route path="/profilecreation"><ProfileCreation/> </Route>
           <PrivateRoute path='/bookinghistory' login={!!loginSession} Component={BookingHistory} />
         </Switch>
       </BrowserRouter>

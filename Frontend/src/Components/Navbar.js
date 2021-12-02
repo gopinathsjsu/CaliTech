@@ -7,8 +7,8 @@ export default function AdminNav(props) {
   const [navBarState, setnavBarState] = useState(props.trigger)
   const history = useHistory()
   const handleLogout = () =>{
-    // localStorage.setItem('accesstoken', '')
-    // history.push('/')
+     localStorage.clear()
+     history.push('/')
   }
   return (
     <div className="container-fluid p-0">

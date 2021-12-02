@@ -1,7 +1,28 @@
 import React from "react";
 import AdminNav from "../Components/Navbar";
+import '../Css files/Project.css';
 
 export default function SearchFlightsResult() {
+  const styleObj={
+    backgroundColor:"green", 
+    border: "black",
+    color:"white",
+    padding: "10px 10px",
+    textAlign: "center",
+    display: "inline-block",
+    fontSize: "20px",
+    fontFamily: "serif",
+      
+    
+    }
+
+    const formObj={
+      padding:"10px",
+    width: "430px",
+    margin: "8px 0",
+    borderRadius: "10px",
+    borderColor:"black"
+    }
   return (
     <>
       <AdminNav />

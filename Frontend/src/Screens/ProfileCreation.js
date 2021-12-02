@@ -2,8 +2,11 @@ import axios from 'axios';
 import {React, useState} from 'react'
 import { useHistory } from 'react-router'
 import AdminNav from '../Components/Navbar';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Particle from '../Components/Particle';
 
-
+toast.configure();
 
 function ProfileCreation() {
 const history = useHistory();
@@ -16,8 +19,36 @@ const history = useHistory();
     }
     const handlesignIn = () => {
       localStorage.setItem('accesstoken', "hello");
-      axios.put('http://localhost:5676/users/update')
-      history.push('/')
+      const custName = localStorage.getItem('custname');
+      const custDetailsId = localStorage.getItem('custid')
+      const custemail = localStorage.getItem('custemail')
+      axios.put('http://localhost:5676/users/update', {id:custDetailsId, name:custName,  number:phone, email:custemail, address:address, passportNumber:passport})
+      .then((res)=>{
+        console.log(res)
+        const CustomToast = ({closeToast})=>{
+          return(
+            <div style={{textAlign:"center"}}>
+              <h4>Profile Update Successfully!</h4>
+            </div>
+          )
+        
+        }
+        toast.success(<CustomToast />, {position: toast.POSITION.BOTTOM_CENTER, autoClose:true})
+
+        localStorage.clear()
+      })
+      .catch((err)=>{
+        const CustomToast1 = ({closeToast})=>{
+          return(
+            <div style={{textAlign:"center"}}>
+              <h4>Profile Update Successfully!</h4>
+            </div>
+          )
+        
+        }
+        toast.error(<CustomToast1 />, {position: toast.POSITION.BOTTOM_CENTER, autoClose:true})
+      })
+      history.push('/login')
     }
 
     const handleInputAddress = (e) => {
@@ -29,7 +60,7 @@ const history = useHistory();
     }
     return (
         <>
-        
+        <Particle/>
         <div className="card shadow-sm border-0 px-3 col-sm-4 rounded-2 mb-3 py-4 mx-auto mt-5 bg-light">
         <div className="card-header bg-transparent border-0 text-center text-uppercase">
           <h5>Hi there! please complete your profile</h5>

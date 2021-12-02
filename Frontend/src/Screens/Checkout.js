@@ -13,6 +13,7 @@ export default function Checkout() {
   const handleShow = () => setShow(true);
   const[selectSeat, setselectSeat]= useState([])
   const [flightDetails, setFlightDetails] = useState();
+  const [modalmsg, setmodalMsg] =useState("")
   useEffect(() => {
     const flgt_id = localStorage.getItem("flight_id");
     //const flgt_price = localStorage.getItem("flight_price");
@@ -29,6 +30,17 @@ export default function Checkout() {
   };
   const handlePayment = () => {
     const userid = localStorage.getItem('userdetails')
+    const milesPoints = localStorage.getItem('miles')
+    if((totalPrice+flightDetails.price) <= milesPoints)
+    {
+      let amount= milesPoints - (totalPrice+flightDetails.price) 
+      setmodalMsg(`Sucess! Your booking confirmed. ${totalPrice+flightDetails.price} miles has been redeemed`)
+      localStorage.setItem('miles', amount)
+    }
+    else{
+      let amount= (totalPrice+flightDetails.price) - milesPoints
+      setmodalMsg(`Sucess! Your booking confirmed. Since you didn't have enough mileage points $${amount} has been deducted from your card`) 
+    }
     console.log(userid)
     axios.post('http://localhost:5676/users/createFlightBooking', {flightId:flightDetails._id, userId:userid , seatNumbers:selectSeat, status:"Booked", totalPrice:totalPrice})
     .then((res) => {
@@ -39,7 +51,7 @@ export default function Checkout() {
     .catch((err) => {
       console.log(err)
     })
-
+ 
     
   };
   return (
@@ -96,7 +108,7 @@ export default function Checkout() {
                     <div className="col">
                       <h5>Base Price: ${flightDetails?.price}</h5>
                       <h5>Total Price: ${totalPrice + flightDetails?.price}</h5>
-                      <h6>Mileage Points = 642.40</h6>
+                      <h6>Mileage Points = {localStorage.getItem('miles')}</h6>
                     </div>
                   </div>
                 </div>
@@ -115,7 +127,7 @@ export default function Checkout() {
             <Modal.Header closeButton>
               <Modal.Title>Booking Confirmation</Modal.Title>
             </Modal.Header>
-            <Modal.Body>Sucess! Your booking has been confirmed</Modal.Body>
+            <Modal.Body>{modalmsg}</Modal.Body>
             <Modal.Footer>
               <Button variant="secondary" onClick={handleClose}>
                 Close

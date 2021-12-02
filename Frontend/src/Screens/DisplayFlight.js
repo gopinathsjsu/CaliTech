@@ -2,6 +2,8 @@ import React, {memo, } from "react";
 import './displayflight.css'
 import { useHistory } from 'react-router'
 import Checkout from './Checkout'
+import Particle from '../Components/Particle'
+import '../Css files/Project.css';
 
 function DisplayFlight(props) {
   const history = useHistory();
@@ -14,6 +16,7 @@ function DisplayFlight(props) {
   console.log(props)
   return (
     <>
+    <Particle/>
       <div
         style={{
           padding: "1.5rem",

@@ -2,6 +2,8 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import AdminNav from "../Components/Navbar";
 import DisplayFlight from "./DisplayFlight";
+import Particle from '../Components/Particle'
+import '../Css files/Project.css';
 // import DateRangePicker from '@wojtekmaj/react-daterange-picker'
 
 export default function SearchFlights() {
@@ -30,13 +32,34 @@ export default function SearchFlights() {
       (val) =>
         val.departureLocation == deploc &&
         val.arrivalLocation == arrloc &&
-        val.flightType == flighttype
+        val.flightType == flighttype 
     );
     setfilteredFlights(res);
     
   };
+  const styleObj={
+    backgroundColor:"green", 
+    border: "black",
+    color:"white",
+    padding: "10px 10px",
+    textAlign: "center",
+    display: "inline-block",
+    fontSize: "20px",
+    fontFamily: "serif",
+      
+    
+    }
+
+    const formObj={
+      padding:"10px",
+    width: "430px",
+    margin: "8px 0",
+    borderRadius: "10px",
+    borderColor:"black"
+    }
   return (
     <>
+      <Particle />
       <AdminNav trigger/>
       {filteredFlights.length > 0 ? (
         <DisplayFlight flightData={filteredFlights} />
@@ -85,6 +108,7 @@ export default function SearchFlights() {
                         <input
                           name="dates"
                           type="date"
+                          style={formObj}
                           className="form-control shadow"
                           placeholder=""
                           onChange={(e) => {
@@ -109,6 +133,7 @@ export default function SearchFlights() {
                         <label className="mb-0">Type</label>
                         <select
                           name="Type"
+                          style={formObj}
                           type="text"
                           className="form-control  shadow form-select"
                           onChange={(e) => {
@@ -122,6 +147,7 @@ export default function SearchFlights() {
                         </select>
                       </div>
                       <button
+                      style={{styleObj,background:'grey'}}
                         className="btn btn-primary"
                         onClick={searchFlightHandle}
                       >
@@ -150,6 +176,7 @@ export default function SearchFlights() {
                         <input
                           name="dates"
                           type="date"
+                          style={formObj}
                           className="form-control shadow"
                           onChange={(e) => {
                             setflightData({

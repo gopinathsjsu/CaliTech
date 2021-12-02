@@ -1,13 +1,28 @@
 import React from "react";
 import AdminNav from "../Components/Navbar";
+import Particle from '../Components/Particle'
+import '../Css files/Project.css';
 
 export default function MileageAccount() {
+  const styleObj={
+    backgroundColor:"green", 
+    border: "black",
+    color:"white",
+    padding: "10px 10px",
+    textAlign: "center",
+    display: "inline-block",
+    fontSize: "20px",
+    fontFamily: "serif",
+      
+    
+    }
   return (
     <>
+      <Particle/>
       <AdminNav trigger/>
       <div className="mt-5">
 
-        <div className="card shadow-sm border-0 px-3 col-sm-11 rounded-2 mb-3 py-4 mx-auto mt-6 bg-light">
+        <div className="card shadow-sm border-0 px-3 col-sm-8 rounded-2 mb-3 py-4 mx-auto mt-6 bg-light">
         <h3 className="text-center">Mileage Account</h3>
           <div className="row">
             <div className="col mx-auto mt-4">
@@ -32,11 +47,6 @@ export default function MileageAccount() {
                   <div className="col">
                     <div className="form-group mb-4">
                       <label className="mb-0">Phone</label>
-                      <input
-                        name="from"
-                        className="form-control shadow"
-                        placeholder="DOB"
-                      />
                     </div>
 
                     <div className="form-group mb-5">
@@ -62,7 +72,7 @@ export default function MileageAccount() {
           <p className="p-0 small mb-0">
                     Book a flight to start earning
                   </p>
-          <button className="btn w-40 btn-primary">
+          <button className="btn w-40 btn-primary" style={{styleObj}}>
                       Book flight{" "}
                     </button>
                     </div>
