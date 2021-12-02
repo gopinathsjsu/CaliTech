@@ -6,11 +6,11 @@ Group meeting, all four members present, formed a game plan and discussed what e
 
 WEEK 2
 
-Decided on the Logic for how to calculate mileage points. Finalized the tools we need for Front end ( ReactJS ). Started working on the design of the UI.
+Decided on the Logic for how to calculate mileage points. Finalized the tools we need for Front end  ( ReactJS ). Started working on the design of the UI.
 
 WEEK 3
 
-Met with Tarun and finalized the design. Started coding the sign up page and login
+Met with Tarun and finalized the design. Started coding UI, using particles and canvas react to make it better looking. 
 
 WEEK 4
 

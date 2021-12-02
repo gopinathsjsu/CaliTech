@@ -51,7 +51,7 @@ router.post('/create', async (req, res) => {
     // eslint-disable-next-line no-underscore-dangle
     if (rows._doc) {
       console.log('Successfully created user');
-      res.status(200).json({ msg: 'Successfully created user' });
+      res.status(200).json({ msg: 'Successfully created user' , id: rows._id});
     } else {
       throw new Error("DB didn't return success response");
     }
@@ -340,7 +340,7 @@ router.post('/flightBookings', async (req, res) => {
     if (FlightData.length > 0) {
       console.log(FlightData);
       console.log('Fetched the flight data from DB');
-      res.status(200).json(FlightData[0]);
+      res.status(200).json(FlightData);
     }
   } catch (e) {
     console.error('Error fetching data from DB:');

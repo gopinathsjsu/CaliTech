@@ -8,6 +8,7 @@ import AdminNav from "../Components/Navbar";
 import { withRouter } from "react-router";
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import '../Css files/Project.css';
 
 toast.configure();
 class LoginForm extends React.Component {
@@ -128,15 +129,28 @@ class LoginForm extends React.Component {
       method:'post',
       url:'http://localhost:5676/users/login',
       data: {
-        email:'abc',
-        password:"q"
+        email:email,
+        password:password
       }
 
     })
     .then((response) =>{
       const custDetails = response.data; 
       this.setState({custDetails:custDetails});
+      localStorage.setItem('userdetails' , custDetails.id)
+      localStorage.setItem('miles' , custDetails.mileagePoints)
+      localStorage.setItem('accesstoken', "hello");
       console.log(custDetails)
+      const CustomToast1 = ({closeToast})=>{
+        return(
+          <div style={{textAlign:"center"}}>
+            <h4>Login Successful!</h4>
+          </div>
+        )
+      
+      }
+      toast.success(<CustomToast1 />, {position: toast.POSITION.BOTTOM_CENTER, autoClose:true})
+      this.props.history.push('/mileageaccount')
 
     })
     .catch((err) =>{
@@ -154,7 +168,7 @@ class LoginForm extends React.Component {
   // }
     
       
-    this.props.history.push('/profilecreation')
+    
     // this.setState({ redirect: "/profilecreation" });
   }
   handlesignIn(e){
@@ -182,7 +196,7 @@ class LoginForm extends React.Component {
       <>
       <Particle />
       <AdminNav trigger={this.state.isLogin}/>
-      <div className="card shadow-sm border-0 px-3 col-sm-4 rounded-2 mb-3 py-4 mx-auto mt-5 bg-light">
+      <div className="card shadow-sm border-0 px-3 col-sm-5 rounded-2 mb-3 py-4 mx-auto mt-5 bg-light">
         <div className="card-header bg-transparent border-0 text-center text-uppercase">
           <h3>Login</h3>
         </div>

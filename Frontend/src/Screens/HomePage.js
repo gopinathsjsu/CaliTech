@@ -1,29 +1,29 @@
 import React from 'react'
 import AdminNav from '../Components/Navbar'
 import Particle from '../Components/Particle'
-import url from '../image/home__.png'
+import images from '../images/flight.jpg' 
 
-console.log("hello" + {url})
+// console.log("hello" + {url})
 
 function HomePage() {
     return (
         <>
         
             {/* <Particle /> */}
-            <AdminNav />
+            <AdminNav/>
             
             <h2> Save more on your travel this Festive Season!</h2>
-            
+            <img src={images} width ="100%"  height ="50%" styles={{overflow:"hidden"}}></img>
 
             
-            <div
+            {/* <div
             className="imagemain"
-            style={{
-                // background: `url(${url})`,
-                background: `url(${url}) no-repeat center center fixed`
+            style={{ */}
+                {/* // background: `url(${url})`,
+                // background: `url(${url}) no-repeat center center fixed` */}
               
-                }}>
-                </div>
+                {/* }}>
+                </div> */}
                 {/* <div class="overlay"
                 style={{width: '100%',
                     height: '100%',

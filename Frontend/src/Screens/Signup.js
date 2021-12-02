@@ -6,6 +6,8 @@ import Particle from '../Components/Particle'
 import axios from 'axios';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ProfileCreation from './ProfileCreation'
+import '../Css files/Project.css';
 
 toast.configure();
 
@@ -132,7 +134,20 @@ class Signup extends React.Component {
       axios.post('http://localhost:5676/users/create', {name , email , password})
     .then((res) => {
       console.log(res)
+      localStorage.setItem('custname',name)
+      localStorage.setItem('custemail',email)
+      localStorage.setItem('custid', res.data.id)
       this.props.history.push('/profilecreation');
+      const CustomToast1 = ({closeToast})=>{
+        return(
+          <div style={{textAlign:"center"}}>
+            <h4>Sign up Successful!</h4>
+          </div>
+        )
+      
+      }
+      toast.success(<CustomToast1 />, {position: toast.POSITION.BOTTOM_CENTER, autoClose:true})
+      
     })
     .catch((err) => {
       console.log(err)
@@ -169,6 +184,18 @@ class Signup extends React.Component {
   }
 
   render() {
+    const styleObj={
+      backgroundColor:"grey", 
+      border: "black",
+      color:"white",
+      padding: "10px 10px",
+      textAlign: "center",
+      display: "inline-block",
+      fontSize: "20px",
+      fontFamily: "serif",
+        
+      
+      }
     const {
       name,
       email,
@@ -192,9 +219,9 @@ class Signup extends React.Component {
     return (
       <>
         <AdminNav trigger={this.state.isLogin}/>
-        {/* <Particle /> */}
+        <Particle />
 
-        <div className="card shadow-sm border-0 px-3 col-sm-4 rounded-2 mb-3 py-4 mx-auto mt-5 bg-light">
+        <div className="card shadow-sm border-0 px-3 col-sm-5 rounded-2 mb-3 py-4 mx-auto mt-5 bg-light">
           <div className="card-header bg-transparent border-0 text-center text-uppercase">
             <h3>Signup</h3>
           </div>
@@ -210,7 +237,7 @@ class Signup extends React.Component {
                   Full Name<span className="text-danger">*</span>
                 </label>
                 <input
-                  name="fname"
+                  name="name"
                   type="text"
                   className="form-control"
                   placeholder="Full name"
@@ -266,7 +293,7 @@ class Signup extends React.Component {
                 />
               </div>
               {/* <p className=" mb-3"> */}
-              <button className="btn btn-primary w-30">Sign Up</button>
+              <button className="btn btn-primary w-30" style={{styleObj}}>Sign Up</button>
                 {/* <input
                   type="button"
                   className="btn btn-primary w-30"
@@ -276,7 +303,7 @@ class Signup extends React.Component {
               <div className="text-center">
                 <p className="small mb-0">Already have an account?</p>
                 <button className="btn btn-primary w-30"
-                onClick={this.handlesignIn}>Login</button>
+                onClick={this.handlesignIn} style={{styleObj}}>Login</button>
                 {/* <input
                   type="button"
                   className="btn btn-primary w-30"

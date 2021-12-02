@@ -70,15 +70,6 @@ function AdminPage() {
                         onChange={handleTypeInput}
                         value={selval}
                       >
-                        <option>
-                          Economy
-                        </option>
-                        <option >
-                          Business
-                        </option>
-                        <option >
-                          Business Premium
-                        </option>
                       </select>
                     </div>
                     </div>
