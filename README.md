@@ -1,4 +1,4 @@
-# team-project-202-team-project
+# CaliTech Team project
 - team-project-202-team-project created by GitHub Classroom
 - Sprint board: https://cmpe-202-team-project.atlassian.net/jira/software/projects/AIRC/boards/2
 - Story for Architechtural Diagram: https://cmpe-202-team-project.atlassian.net/browse/AIRC-2
@@ -13,3 +13,35 @@
 
 Team Meeting:
 Every Thursday 
+
+Tools used :
+
+MERN Stack 
+
+Databse:
+
+MongoDB
+
+Task Allocation :
+
+Frontend: Tarun and Ishaan
+Backend: Rakesh & Raajmaathangini 
+
+
+Admin Features:
+1) Login
+2) Add flightd and update them
+3) Search all flights 
+
+User Features:
+1) Sign up/ Login 
+2) Search flights 
+3) Change seat or update the current booking 
+4) Pay using card or points 
+
+Steps to start:
+
+1) Clone the repo
+2) npm install both back end and front end
+3) npm run build 
+4) This will open up your browser and you will be able to access the application  
