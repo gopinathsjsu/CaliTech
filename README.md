@@ -23,8 +23,8 @@ MongoDB atlas
 
 Task Allocation :
 
-Frontend: Tarun and Ishaan
-Backend: Rakesh & Raajmaathangini 
+Frontend: Raajmaathangi and Ishaan
+Backend: Rakesh & Tarun 
 Database: Rakesh 
 Documentation: Ishaan
 
@@ -43,6 +43,11 @@ User Features:
 Steps to start:
 
 1) Clone the repo
-2) npm install both back end and front end
-3) npm run build 
-4) This will open up your browser and you will be able to access the application  
+2) Frontend:
+    a) npm install
+    b)npm start
+    Backend:
+    a) npm install
+    b)node index.js
+4) npm run build 
+5) This will open up your browser and you will be able to access the application  
