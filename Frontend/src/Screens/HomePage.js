@@ -10,7 +10,7 @@ function HomePage() {
         <>
         
             {/* <Particle /> */}
-            <AdminNav />
+            <AdminNav trigger/>
             
             <h2> Save more on your travel this Festive Season!</h2>
             

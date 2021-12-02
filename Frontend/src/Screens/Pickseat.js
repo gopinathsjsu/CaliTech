@@ -20,6 +20,7 @@ export default class Pickseat  extends Component {
       console.log(`Added seat ${number}, row ${row}, id ${id}`)
       const newTooltip = `tooltip for id-${id}`
       addCb(row, number, id, newTooltip)
+      this.props.updatePrice(500, number)
       this.setState({ loading: false })
     })
   }
@@ -32,6 +33,7 @@ export default class Pickseat  extends Component {
       console.log(`Removed seat ${number}, row ${row}, id ${id}`)
       const newTooltip = ['A', 'B', 'C'].includes(row) ? null : ''
       removeCb(row, number, newTooltip)
+      this.props.updatePrice(-500)
       this.setState({ loading: false })
     })
   }

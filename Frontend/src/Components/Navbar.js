@@ -1,7 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router";
 
 
 export default function AdminNav(props) {
+
+  const [navBarState, setnavBarState] = useState(props.trigger)
+  const history = useHistory()
+  const handleLogout = () =>{
+    // localStorage.setItem('accesstoken', '')
+    // history.push('/')
+  }
   return (
     <div className="container-fluid p-0">
       <nav
@@ -37,13 +45,23 @@ export default function AdminNav(props) {
               </a>
             </li></>):
             (<><li className={"nav-item"}>
-            <a className="nav-link" href="/profile">
+            <a className="nav-link" href="/mileageaccount">
               Miles Account
             </a>
           </li>
           <li className={"nav-item"}>
-            <a className="nav-link" href="/miles">
+            <a className="nav-link" href="/searchflights">
               Check Flights
+            </a>
+          </li>
+          <li className={"nav-item"}>
+            <a className="nav-link" href="/bookinghistory">
+              Booking History
+            </a>
+          </li>
+          <li className={"nav-item"}>
+            <a className="nav-link" href="/"onClick={handleLogout}>
+              Logout
             </a>
           </li></>)
             }

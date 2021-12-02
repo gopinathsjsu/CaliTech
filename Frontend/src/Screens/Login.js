@@ -136,6 +136,7 @@ class LoginForm extends React.Component {
     .then((response) =>{
       const custDetails = response.data; 
       this.setState({custDetails:custDetails});
+      localStorage.setItem('userdetails' , custDetails.id)
       console.log(custDetails)
 
     })

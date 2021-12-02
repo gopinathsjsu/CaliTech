@@ -1,11 +1,22 @@
-import React from 'react'
+import axios from 'axios'
+import React, {useState, useEffect} from 'react'
 import { Tabs, Tab } from 'react-bootstrap'
 import AdminNav from '../Components/Navbar'
+import './BookingHistory.css'
 
 function BookingHistory() {
+    const [bookingDetails, setBookinbDetails] = useState()
+    useEffect(()=>{
+        const userid = localStorage.getItem('userdetails')
+        axios.post('http://localhost:5676/users/flightBookings',{userId:userid})
+        .then((res)=>{
+            setBookinbDetails(res.data)
+            console.log(res.data)
+        })
+    },[])
     return (
         <>
-        <AdminNav />
+        <AdminNav trigger/>
          <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
         <Tab eventKey="pastjourney" title="Past Flights">
         <div style={{
@@ -37,7 +48,22 @@ function BookingHistory() {
          </div>
         </Tab>
         <Tab eventKey="upcomingflights" title="Upcoming Flights">
-            
+        {bookingDetails?.map((val) => (
+        <div className="Flightlist"> 
+            <ul>
+            <li
+              style={{listStyle:'none'
+                
+              }}
+            >
+              Flight Name:  {val.airlineName} 
+              
+            </li>
+            </ul>
+
+         
+        </div>
+                    ))}
         </Tab>
         </Tabs>   
         </>

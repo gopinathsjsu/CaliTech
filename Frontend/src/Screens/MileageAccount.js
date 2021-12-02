@@ -31,10 +31,9 @@ export default function MileageAccount() {
                   </div>
                   <div className="col">
                     <div className="form-group mb-4">
-                      <label className="mb-0">DOB</label>
+                      <label className="mb-0">Phone</label>
                       <input
                         name="from"
-                        type="text"
                         className="form-control shadow"
                         placeholder="DOB"
                       />

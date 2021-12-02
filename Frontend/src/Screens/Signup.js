@@ -132,6 +132,15 @@ class Signup extends React.Component {
       axios.post('http://localhost:5676/users/create', {name , email , password})
     .then((res) => {
       console.log(res)
+      const CustomToast1 = ({closeToast})=>{
+        return(
+          <div style={{textAlign:"center"}}>
+            <h4>Sign up Successful!</h4>
+          </div>
+        )
+      
+      }
+      toast.success(<CustomToast1 />, {position: toast.POSITION.BOTTOM_CENTER, autoClose:true})
       this.props.history.push('/profilecreation');
     })
     .catch((err) => {
