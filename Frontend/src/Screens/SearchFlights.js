@@ -3,7 +3,9 @@ import React, { useEffect, useState } from "react";
 import AdminNav from "../Components/Navbar";
 import DisplayFlight from "./DisplayFlight";
 import Particle from '../Components/Particle'
+import { BACKEND_HOST, BACKEND_PORT } from "../config";
 import '../Css files/Project.css';
+import {toast} from "react-toastify";
 // import DateRangePicker from '@wojtekmaj/react-daterange-picker'
 
 export default function SearchFlights() {
@@ -17,7 +19,7 @@ export default function SearchFlights() {
     arrloc: "",
   });
   useEffect(() => {
-    axios.get("http://localhost:5676/flights").then((res) => {
+    axios.get(`http://${BACKEND_HOST}:${BACKEND_PORT}/flights`).then((res) => {
       console.log("response", res);
       console.log(filteredFlights.length)
       setFlightDetails(res.data);
@@ -32,8 +34,21 @@ export default function SearchFlights() {
       (val) =>
         val.departureLocation == deploc &&
         val.arrivalLocation == arrloc &&
-        val.flightType == flighttype 
+        val.flightType == flighttype &&
+          (new Date(departuredate).toISOString()) === (val.departureDateTime) &&
+          (new Date(arrivalDate).toISOString()) === (val.arrivalDateTime)
     );
+    if(res.length === 0){
+      const CustomToast = ({closeToast})=>{
+        return(
+            <div style={{textAlign:"center"}}>
+              <h4>None of the flights match your search!</h4>
+            </div>
+        )
+
+      }
+      toast.error(<CustomToast />, {position: toast.POSITION.BOTTOM_CENTER, autoClose:true})
+    }
     setfilteredFlights(res);
     
   };
@@ -157,7 +172,7 @@ export default function SearchFlights() {
                       <div className="form-group mb-4">
                         <label className="mb-0">To</label>
                         <input
-                          name="from"
+                          name="to"
                           type="text"
                           className="form-control shadow"
                           placeholder="To"

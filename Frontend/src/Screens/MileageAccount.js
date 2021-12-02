@@ -1,9 +1,26 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import AdminNav from "../Components/Navbar";
 import Particle from '../Components/Particle'
+import { useHistory } from "react-router-dom";
 import '../Css files/Project.css';
+import axios from "axios";
+import {BACKEND_HOST, BACKEND_PORT} from "../config";
 
 export default function MileageAccount() {
+  const history = useHistory();
+  const details = JSON.parse(localStorage.getItem('allDetails'))
+
+  const [customerDetails, setCustomerDetails] =useState({})
+  useEffect(() => {
+
+    axios.get(`http://${BACKEND_HOST}:${BACKEND_PORT}/users/${details.id}`).then((res) => {
+      console.log("response", res);
+      setCustomerDetails(res.data[0]);
+      localStorage.setItem("miles", res.data[0].mileagePoints)
+      //setBasePrice(flgt_price)
+    });
+  }, []);
+
   const styleObj={
     backgroundColor:"green", 
     border: "black",
@@ -16,6 +33,11 @@ export default function MileageAccount() {
       
     
     }
+
+    const handleClick = (e)=>{
+      history.push('/searchflights')
+    }
+
   return (
     <>
       <Particle/>
@@ -31,27 +53,27 @@ export default function MileageAccount() {
                   <div className="col">
                     <div className=" form-group mb-4">
                       <label className="mb-0">Full Name</label>
-                      <p>{''}</p>
+                      <p>{customerDetails.name}</p>
                     </div>
 
                     <div className="form-group mb-4">
                       <label className="mb-0">Number Of Miles Earned</label>
-                      <p>{''}</p>
+                      <p>{customerDetails.mileagePoints}</p>
                     </div>
 
                     <div className="form-group mb-4">
                       <label className="mb-0">Passport Number</label>
-                      <p>{''}</p>
+                      <p>{customerDetails.passportNumber}</p>
                     </div>
                   </div>
                   <div className="col">
-                    <div className="form-group mb-4">
-                      <label className="mb-0">Phone</label>
-                    </div>
+                    {/*<div className="form-group mb-4">*/}
+                    {/*  <label className="mb-0">Phone</label>*/}
+                    {/*</div>*/}
 
                     <div className="form-group mb-5">
                       <label className="mb-0">Frequent Flyer Number</label>
-                      <p>{'123'}</p>
+                      <p>{customerDetails.FFNumber}</p>
                     </div>
                   </div>
                 </div>
@@ -72,7 +94,7 @@ export default function MileageAccount() {
           <p className="p-0 small mb-0">
                     Book a flight to start earning
                   </p>
-          <button className="btn w-40 btn-primary" style={{styleObj}}>
+          <button className="btn w-40 btn-primary" style={{styleObj}} onClick={handleClick}>
                       Book flight{" "}
                     </button>
                     </div>

@@ -5,6 +5,7 @@ import AdminNav from '../Components/Navbar';
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Particle from '../Components/Particle';
+import { BACKEND_HOST, BACKEND_PORT } from "../config";
 
 toast.configure();
 
@@ -22,7 +23,7 @@ const history = useHistory();
       const custName = localStorage.getItem('custname');
       const custDetailsId = localStorage.getItem('custid')
       const custemail = localStorage.getItem('custemail')
-      axios.put('http://localhost:5676/users/update', {id:custDetailsId, name:custName,  number:phone, email:custemail, address:address, passportNumber:passport})
+      axios.put(`http://${BACKEND_HOST}:${BACKEND_PORT}/users/update`, {id:custDetailsId, name:custName,  number:phone, email:custemail, address:address, passportNumber:passport})
       .then((res)=>{
         console.log(res)
         const CustomToast = ({closeToast})=>{
@@ -41,7 +42,7 @@ const history = useHistory();
         const CustomToast1 = ({closeToast})=>{
           return(
             <div style={{textAlign:"center"}}>
-              <h4>Profile Update Successfully!</h4>
+              <h4>Error updating the user</h4>
             </div>
           )
         

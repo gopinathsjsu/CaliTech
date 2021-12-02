@@ -7,6 +7,7 @@ import axios from "axios";
 import AdminNav from "../Components/Navbar";
 import { withRouter } from "react-router";
 import {toast} from 'react-toastify';
+import { BACKEND_HOST, BACKEND_PORT } from "../config";
 import 'react-toastify/dist/ReactToastify.css';
 import '../Css files/Project.css';
 
@@ -127,7 +128,7 @@ class LoginForm extends React.Component {
     // e.currentTarget.form.classList.remove('was-validated')
     axios({
       method:'post',
-      url:'http://localhost:5676/users/login',
+      url:`http://${BACKEND_HOST}:${BACKEND_PORT}/users/login`,
       data: {
         email:email,
         password:password
@@ -140,6 +141,7 @@ class LoginForm extends React.Component {
       localStorage.setItem('userdetails' , custDetails.id)
       localStorage.setItem('miles' , custDetails.mileagePoints)
       localStorage.setItem('accesstoken', "hello");
+      localStorage.setItem('allDetails', JSON.stringify(custDetails));
       console.log(custDetails)
       const CustomToast1 = ({closeToast})=>{
         return(

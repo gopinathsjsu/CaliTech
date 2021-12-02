@@ -4,6 +4,7 @@ import { useHistory } from 'react-router'
 import Checkout from './Checkout'
 import Particle from '../Components/Particle'
 import '../Css files/Project.css';
+import moment from "moment";
 
 function DisplayFlight(props) {
   const history = useHistory();
@@ -16,7 +17,7 @@ function DisplayFlight(props) {
   console.log(props)
   return (
     <>
-    <Particle/>
+    {/*<Particle/>*/}
       <div
         style={{
           padding: "1.5rem",
@@ -24,16 +25,16 @@ function DisplayFlight(props) {
       >
         {props.flightData?.map((val) => (
         <div className="Flightlist">
-        
-           
+
+
             <ul >
             <li
               style={{listStyle:'none'
-                
+
               }}
             >
-              Flight Name:  {val.airlineName} 
-              
+              Flight Name:  {val.airlineName}
+
             </li>
             <li
               style={{
@@ -45,6 +46,20 @@ function DisplayFlight(props) {
                 listStyle:'none'
               }}
             >Arrival Location: {val.arrivalLocation}</li>
+                <li
+                    style={{
+                        listStyle:'none'
+                    }}
+                >Departure Time: {moment(val.departureDateTime).add(1,"days").format(
+                    "MMM Do YY HH:MM"
+                )}</li>
+                <li
+                    style={{
+                        listStyle:'none'
+                    }}
+                >Arrival Time: {moment(val.arrivalDateTime).add(1,"days").format(
+                    "MMM Do YY HH:MM"
+                )}</li>
             <span>
 
             <button onClick={() => checkoutHandle(val._id,val.price)}> Book Now </button>

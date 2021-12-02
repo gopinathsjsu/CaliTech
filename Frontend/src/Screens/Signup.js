@@ -8,6 +8,7 @@ import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ProfileCreation from './ProfileCreation'
 import '../Css files/Project.css';
+import { BACKEND_HOST, BACKEND_PORT } from "../config";
 
 toast.configure();
 
@@ -131,7 +132,7 @@ class Signup extends React.Component {
       toast.error(<CustomToast />, {position: toast.POSITION.BOTTOM_CENTER, autoClose:true})
     }
     else{
-      axios.post('http://localhost:5676/users/create', {name , email , password})
+      axios.post(`http://${BACKEND_HOST}:${BACKEND_PORT}/users/create`, {name , email , password})
     .then((res) => {
       console.log(res)
       localStorage.setItem('custname',name)

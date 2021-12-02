@@ -13,9 +13,9 @@ const saltRounds = 10;
 // const selectQuery = 'SELECT * FROM users';
 
 /* GET users listing. */
-router.get('/', async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
-    const rows = await Users.find({});
+    const rows = await Users.find({ _id: req.params.id });
     if (rows) {
       console.log('Fetched the data from DB');
       res.status(200).json(rows);
@@ -109,7 +109,9 @@ router.post('/login', /*validate,*/ async (req, res) => {
               name: row.name,
               number: row.number,
               email: row.email,
-              address: row.address ? JSON.parse(row.address) : row.address,
+              address: row.address,
+              passportNumber: row.passportNumber,
+              FFNumber: row.FFNumber,
               mileagePoints: row.mileagePoints
             };
             flag = true;
@@ -222,6 +224,15 @@ router.post('/orders', async (req, res) => {
 
 router.post('/createFlightBooking', async (req, res) => {
   try {
+    const flightData = await Flights.find({ _id: req.body.flightId });
+    console.log(flightData);
+    let seatsInFlights = JSON.parse(JSON.stringify(flightData[0])).bookedSeats;
+    for(let i in req.body.seatNumbers){
+      if (seatsInFlights.indexOf(req.body.seatNumbers[i]) > -1){
+        return res.status(403).json({ msg: 'Seat(s) already booked' });
+      }
+    }
+
     const newBooking = new FlightBooking({
       flightId: req.body.flightId,
       userId: req.body.userId,
@@ -231,9 +242,6 @@ router.post('/createFlightBooking', async (req, res) => {
     });
     const rows = await newBooking.save();
 
-    const flightData = await Flights.find({ _id: req.body.flightId });
-    console.log(flightData);
-    let seatsInFlights = JSON.parse(JSON.stringify(flightData[0])).bookedSeats;
     for(let i in req.body.seatNumbers){
       seatsInFlights.push(req.body.seatNumbers[i])
     }
@@ -243,7 +251,12 @@ router.post('/createFlightBooking', async (req, res) => {
 
     const userData = await Users.find({ _id: req.body.userId });
     console.log(userData);
-    let mileagePoints = JSON.parse(JSON.stringify(userData[0])).mileagePoints + req.body.totalPrice * 2;
+    let mileagePoints
+    if(req.body.bookedWithMiles){
+      mileagePoints = JSON.parse(JSON.stringify(userData[0])).mileagePoints - req.body.totalPrice;
+    }else{
+      mileagePoints = JSON.parse(JSON.stringify(userData[0])).mileagePoints + req.body.totalPrice;
+    }
     const rowsu = await Users.updateOne({ _id: req.body.userId }, {
       mileagePoints
     });

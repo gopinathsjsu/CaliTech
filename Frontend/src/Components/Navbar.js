@@ -14,7 +14,7 @@ export default function AdminNav(props) {
     <div className="container-fluid p-0">
       <nav
         className="navbar shadow navbar-expand-lg navbar-light px-2"
-        style={{ backgroundColor: "#A9A9A9" }}
+        style={{ backgroundColor: "#6bb4e1" }}
       >
         <a className="navbar-brand" href="/">
           Pacific Airlines
@@ -43,6 +43,11 @@ export default function AdminNav(props) {
               <a className="nav-link" href="/signup">
                 Signup
               </a>
+            </li>
+            <li className={"nav-item"}>
+                <a className="nav-link" href="/adminLogin">
+                    Admin
+                </a>
             </li></>):
             (<><li className={"nav-item"}>
             <a className="nav-link" href="/mileageaccount">

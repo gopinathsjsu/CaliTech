@@ -11,6 +11,7 @@ import HomePage from './Screens/HomePage'
 import Pickseat from "./Screens/Pickseat";
 import ProfileCreation from "./Screens/ProfileCreation";
 import BookingHistory from './Screens/BookingHistory'
+import AdminLogin from "./Screens/AdminLogin";
 
 
 function App() {
@@ -18,7 +19,8 @@ const loginSession = localStorage.getItem('accesstoken');
 const PrivateRoute = ({login,Component, ...rest}) => {
   return(
     <Route {...rest}>
-      {login ? <Component /> : <Redirect to="/" />}
+      <Component />
+      {/*{login ? <Component /> : <Redirect to="/" />}*/}
     </Route>
   )
 }
@@ -37,9 +39,12 @@ const PrivateRoute = ({login,Component, ...rest}) => {
           <Route path="/adminpage">
             <AdminPage />
           </Route>
+          <Route path="/adminLogin">
+            <AdminLogin />
+          </Route>
           <PrivateRoute path="/checkout" login={!!loginSession} Component={Checkout} />
           <PrivateRoute path="/searchflights" login={!!loginSession} Component={SearchFlights} />
-          <PrivateRoute path="/mileageaccount" login={!!loginSession} Component={MileageAccount} />
+          <PrivateRoute path="/mileageaccount" exact login={!!loginSession} Component={MileageAccount} />
           <PrivateRoute path="/pickseat" login={!!loginSession} Component={Pickseat} />
           <Route path="/profilecreation"><ProfileCreation/> </Route>
           <PrivateRoute path='/bookinghistory' login={!!loginSession} Component={BookingHistory} />
