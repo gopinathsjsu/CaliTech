@@ -85,15 +85,9 @@ router.post('/create', async (req, res) => {
 /* Update details */
 router.put('/update', async (req, res) => {
   try {
-    const rows = await Flights.updateOne({ _id: req.body.id }, {
-      airlineName: req.body.airlineName,
-      departureLocation: req.body.departureLocation,
-      arrivalLocation: req.body.arrivalLocation,
-      departureDateTime: req.body.departureDateTime,
-      arrivalDateTime: req.body.arrivalDateTime,
-      flightType: req.body.flightType,
-      totalSeats: req.body.totalSeats,
-      price: req.body.price,
+    const rows = await Flights.updateOne({ flightCode: req.body.flightCode }, {
+      departureDateTime: req.body.departureDate,
+      arrivalDateTime: req.body.arrivalDate
     });
     console.log(rows);
     if (rows.modifiedCount === 1) {
