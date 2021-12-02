@@ -43,7 +43,7 @@ function BookingHistory() {
   }
   return (
     <>
-    <Particle/>
+    {/* <Particle/> */}
       <AdminNav trigger />
       <Tabs
         defaultActiveKey="profile"
