@@ -24,6 +24,7 @@ MongoDB atlas
 Task Allocation :
 
 Frontend: Raajmaathangi and Ishaan
+
 Backend: Rakesh & Tarun 
 Database: Rakesh 
 Documentation: Ishaan
