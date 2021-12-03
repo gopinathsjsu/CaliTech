@@ -49,7 +49,7 @@ Steps to start:
 2) Navigate to Frontend:
     - npm install
     - npm start
-  Navigate to Backend:
+3) Navigate to Backend:
     - npm install
     - node index.js
-3) This will open up your browser and you will be able to access the application  
+4) This will open up your browser and you will be able to access the application  
