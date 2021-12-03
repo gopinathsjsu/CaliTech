@@ -6,7 +6,7 @@
 - XP Values : https://github.com/gopinathsjsu/team-project-202-team-project/blob/master/Xp_Values.md
 - Retrospective : https://github.com/gopinathsjsu/team-project-202-team-project/blob/master/Retrospect.md
 - Project Boards (All 5 sprints) : https://github.com/gopinathsjsu/team-project-202-team-project/blob/master/Projectboard.pdf
-- Individual Journals : All individual journals are in home directory of repository
+- Individual Journals : All individual journals and the above mentioned documents are in home directory of this repository
 
 
 - Story for Architechtural Diagram: https://cmpe-202-team-project.atlassian.net/browse/AIRC-2
