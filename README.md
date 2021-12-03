@@ -25,8 +25,10 @@ Task Allocation :
 
 Frontend: Raajmaathangi and Ishaan
 
-Backend: Rakesh & Tarun 
+Backend: Rakesh & Tarun
+
 Database: Rakesh 
+
 Documentation: Ishaan
 
 
@@ -44,11 +46,10 @@ User Features:
 Steps to start:
 
 1) Clone the repo
-2) Frontend:
+2) Navigate to Frontend:
     a) npm install
-    b)npm start
-    Backend:
+    b) npm start
+  Navigate to Backend:
     a) npm install
-    b)node index.js
-4) npm run build 
-5) This will open up your browser and you will be able to access the application  
+    b) node index.js
+3) This will open up your browser and you will be able to access the application  
