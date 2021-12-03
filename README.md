@@ -14,12 +14,10 @@ Team Meeting:
 Every Thursday at 1 PM : Zoom / In person 
 
 Tools used :
-
-MERN Stack
+- MERN Stack
 
 Database:
-
-MongoDB atlas 
+- MongoDB atlas 
 
 Task Allocation :
 
