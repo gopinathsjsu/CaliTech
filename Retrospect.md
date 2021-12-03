@@ -1,5 +1,5 @@
 WEEK 1:
--What went well?
+- What went well?
   - Requirement Analysis
 
 - What went wrong?
@@ -10,7 +10,7 @@ WEEK 1:
  - Simplification of tasks i.e., mileage points dont need to be calculated in a complex way 
 
 WEEK 2:
--What went well?
+- What went well?
   - Backend code addition is going smooth.
   - Mathangini and Rakesh are proficient in Backend and are working good together.
 
@@ -24,7 +24,7 @@ WEEK 2:
 
 
 WEEK 3:
--What went well?
+- What went well?
   - DB set up was completed and connection is working fine.
   - Significant improvement in frontend code
 
@@ -38,7 +38,7 @@ WEEK 3:
 
 
 WEEK 4:
--What went well?
+- What went well?
   - backend is being developed in good speed
 
 - What went wrong?
@@ -49,7 +49,7 @@ WEEK 4:
 
 
 WEEK 5:
--What went well?
+- What went well?
   - The whole application integration is at better stage
 
 - What went wrong?
