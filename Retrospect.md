@@ -6,8 +6,8 @@ WEEK 1:
   - zoom meeting did not work for the first time, in person is good for introduction and initial stages.
 
 - Action Plan
- - Try meeting in person for every sprint planning.
- - Simplification of tasks i.e., mileage points dont need to be calculated in a complex way 
+  - Try meeting in person for every sprint planning.
+  - Simplification of tasks i.e., mileage points dont need to be calculated in a complex way 
 
 WEEK 2:
 - What went well?
@@ -18,8 +18,8 @@ WEEK 2:
   - Front end development with reactJS is complex and needs more hours than expected.
 
 - Action Plan
- - Spend extra hours on frontend development.
- - Add more person efforts to frontend deveoplment. 
+  - Spend extra hours on frontend development.
+  - Add more person efforts to frontend deveoplment. 
 
 
 
@@ -33,8 +33,8 @@ WEEK 3:
   - More effort was spent on simple tasks.
 
 - Action Plan
- - Every individual has to work on dependent tasks first to resolve blockers and then concentrate on individual tasks.
- - Simplification of tasks i.e., mileage points dont need to be calculated in a complex way 
+  - Every individual has to work on dependent tasks first to resolve blockers and then concentrate on individual tasks.
+  - Simplification of tasks i.e., mileage points dont need to be calculated in a complex way 
 
 
 WEEK 4:
@@ -45,7 +45,7 @@ WEEK 4:
   - Frontend can be still be improved but so far so good
 
 - Action Plan
- - Divison of specific task of frontend to each member to work together and complete is faster.
+  - Divison of specific task of frontend to each member to work together and complete is faster.
 
 
 WEEK 5:
@@ -56,5 +56,5 @@ WEEK 5:
   - communication is one thing we lacked on, lots of bug fixes in the last week.
 
 - Action Plan
- - Ensuring that each individual updates about his task everyday in meeting as this is the final week
- - Resolution of blockers shoulde be priority
+  - Ensuring that each individual updates about his task everyday in meeting as this is the final week
+  - Resolution of blockers shoulde be priority
