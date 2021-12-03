@@ -47,9 +47,9 @@ Steps to start:
 
 1) Clone the repo
 2) Navigate to Frontend:
-    a) npm install
-    b) npm start
+    - npm install
+    - npm start
   Navigate to Backend:
-    a) npm install
-    b) node index.js
+    - npm install
+    - node index.js
 3) This will open up your browser and you will be able to access the application  
